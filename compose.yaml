@@ -1,0 +1,3 @@
+include:
+  - path: notes-backend/compose.yaml
+  - path: notesbooks-backend/compose.yaml
