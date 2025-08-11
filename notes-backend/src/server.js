@@ -1,29 +1,13 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+const express = require("express");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const { noteRouter } = require("./routes");
 
 const app = express();
 const port = process.env.PORT || 3001;
 
-// Middleware to parse JSON bodies
 app.use(bodyParser.json());
-
-// Sample route to handle a POST request
-app.post('/api/notes', (req, res) => {
-    const note = req.body;
-    // Here you would typically save the note to a database
-    console.log('Received note:', note);
-    res.status(201).send({ message: 'Note created successfully', note });
-});
-// Sample route to handle a GET request
-app.get('/api/notes', (req, res) => { 
-    // Here you would typically fetch notes from a database
-    const notes = [
-        { id: 1, content: 'First note' },
-        { id: 2, content: 'Second note' }
-    ];
-    res.status(200).send(notes);
-});
+app.use("/api/notes", noteRouter);
 
 mongoose
   .connect(process.env.DB_URL)
